@@ -1,0 +1,20 @@
+name: Extract project archive
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract archive and commit files
+        run: |
+          unzip -o racerider3d.zip
+          rm racerider3d.zip
+          rm -f .github/workflows/extract.yml
+          git config user.name "coindago"
+          git config user.email "Coindagocontact@gmail.com"
+          git add -A
+          git commit -m "Add cleaned RaceRider3D Unity project (base for Android build)" || echo "nothing to commit"
+          git push
