@@ -3,7 +3,6 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  workflows: write
 jobs:
   extract:
     runs-on: ubuntu-latest
@@ -16,6 +15,6 @@ jobs:
           rm -f .github/workflows/extract.yml
           git config user.name "coindago"
           git config user.email "Coindagocontact@gmail.com"
-          git add -A
+          git add -A -- ':!.github/workflows'
           git commit -m "Add cleaned RaceRider3D Unity project (base for Android build)" || echo "nothing to commit"
           git push
